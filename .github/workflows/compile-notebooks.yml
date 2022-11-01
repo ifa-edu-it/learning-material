@@ -25,4 +25,4 @@ jobs:
           jupyter-nbconvert --to html ./courses/**/*.ipynb
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: '*.ipynb'
+          file_pattern: '*.html'
