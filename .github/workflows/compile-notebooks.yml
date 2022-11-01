@@ -1,0 +1,25 @@
+name: Compile notebooks
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7"]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install jupyter
+        run: |
+          python -m pip install --upgrade pip
+          pip install nbconvert
+      - name: Check folder
+        run: ls
+      - name: Compile notebooks to html
+        run: |
+          jupyter-nbconvert --to html ./courses/**/*.ipynb
